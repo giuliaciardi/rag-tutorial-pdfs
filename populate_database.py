@@ -1,11 +1,15 @@
 import argparse
 import os
 import shutil
-from langchain.document_loaders.pdf import PyPDFDirectoryLoader
+from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.schema.document import Document
 from get_embedding_function import get_embedding_function
-from langchain.vectorstores.chroma import Chroma
+from langchain_community.vectorstores import Chroma
+import sqlite3
+from datetime import datetime
+import os
+import csv
 
 
 CHROMA_PATH = "chroma"
@@ -17,6 +21,7 @@ def main():
     # Check if the database should be cleared (using the --clear flag).
     parser = argparse.ArgumentParser()
     parser.add_argument("--reset", action="store_true", help="Reset the database.")
+    parser.add_argument("--save_metadata", action="store_true", help="Save metadata to CSV file.")
     args = parser.parse_args()
     if args.reset:
         print("✨ Clearing Database")
@@ -24,6 +29,18 @@ def main():
 
     # Create (or update) the data store.
     documents = load_documents()
+    if args.save_metadata:
+        for i in range(len(documents)):
+            metadata = documents[i].metadata
+            # Extract the source path
+            source_path = metadata['source']
+
+            # Extract the filename and file type
+            filename = os.path.basename(source_path)
+            file_type = os.path.splitext(filename)[1][1:]  # get the file extension without the dot
+            
+            metadata_population_csv(file_name=filename, file_type=file_type, file_size=0)
+    
     chunks = split_documents(documents)
     add_to_chroma(chunks)
 
@@ -104,7 +121,48 @@ def calculate_chunk_ids(chunks):
 def clear_database():
     if os.path.exists(CHROMA_PATH):
         shutil.rmtree(CHROMA_PATH)
+        
+def metadata_population_csv(file_name, file_type, file_size):
+    # Get the current date and time
+    current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+    # Get the file information
+    file_name = file_name
+    file_type = file_type
+    file_size = os.path.getsize(f"{DATA_PATH}/{file_name}") / (1024 * 1024)  # Convert to MB
+
+    # Define the CSV file path
+    csv_file_path = os.path.join(os.path.dirname(__file__), "metadata.csv")
+
+    # Check if the CSV file already exists
+    csv_file_exists = os.path.exists(csv_file_path)
+
+    # Open the CSV file in append mode
+    with open(csv_file_path, "a", newline="") as file:
+        writer = csv.writer(file)
+        
+        # Get the last index in the CSV file
+        last_index = 0
+        if csv_file_exists:
+            with open(csv_file_path, "r") as file:
+                reader = csv.reader(file)
+                last_index = sum(1 for _ in reader) - 1
+
+        # Calculate the new index
+        new_index = last_index + 1
+        
+        metadata = [new_index, current_datetime, file_name, file_type, file_size]
+
+        # Write the index and metadata row
+        writer.writerow([new_index] + metadata)
+        # Write the header row if the file doesn't exist
+        if not csv_file_exists:
+            writer.writerow(["Index","Datetime", "File Name", "File Type", "File Size MB"])
+
+        # Write the metadata row
+        writer.writerow(metadata)
+
+    print("✅ Metadata saved to CSV file.")
 
 if __name__ == "__main__":
     main()

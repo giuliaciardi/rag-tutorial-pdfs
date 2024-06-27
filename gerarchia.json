@@ -1,0 +1,74 @@
+{
+"Ingredients": {
+    "Croton Lechleri Resin Extract": {
+    "Wound healing/cicatrization": {
+        "Wound contraction": {
+        "Active molecule": ["proanthocyanidins"],
+        "Target": ["fibroblasts", "keratinocytes", "elastin"]
+        },
+        "Epithelization": {},
+        "Collagen deposition": {},
+        "Skin elasticity": {},
+        "Preventing and treating striae distensae": {},
+        "Cicatrisation": {
+        "Active molecule": ["Taspine"]
+        }
+    },
+    "Diabetic skin/ulcers": {},
+    "Anti-inflammatory": {
+        "Tapsine": {},
+        "Bexarotene": {},
+        "2-hydroxy-1-naphthaldehyde isonicotinoyl hydrazone": {}
+    },
+    "Immunomodulation": {},
+    "Antioxidant Properties": {},
+    "Anti-Glycation": {
+        "Biological Mechanism": "Albumin glycation/anti AGE formation"
+    },
+    "Antimicrobial/fungal problems": {},
+    "Itching/insects": {},
+    "Melanoma cell proliferation": {},
+    "Hydration": {},
+    "Atopic dermatitis (eczema)": {
+        "Wound healing": {},
+        "Immunomodulation": {}
+    },
+    "Thick skin": {},
+    "Vascular problems": {},
+    "Diabetic scleredema": {},
+    "Diabetic dermopathy": {},
+    "Skin pigmentation": {}
+    },
+    "Citrus Paradisii": {
+    "Wound healing/cicatrization": {},
+    "Diabetic skin/ulcers": {},
+    "Anti-inflammatory": {},
+    "Antioxidant": {
+        "Active molecule": "Flavonoids"
+    },
+    "Anti-Glycation": {
+        "Active molecule": "Flavonoids"
+    },
+    "Antimicrobial/fungal problems": {},
+    "Itching/insects": {},
+    "Melanoma cell proliferation": {},
+    "Hydration": {},
+    "Atopic dermatitis (eczema)": {},
+    "Thick skin": {},
+    "Vascular problems": {},
+    "Diabetic scleredema": {},
+    "Diabetic dermopathy": {},
+    "Skin pigmentation": {}
+    },
+    "Urea": {},
+    "Hydrolyzed hyaluronic acid": {},
+    "Evening Primrose Oil": {},
+    "Sodium hyaluronate": {},
+    "Shea Butter": {},
+    "Thyme extract": {},
+    "Witch hazel extract": {},
+    "Glycerin": {},
+    "Vitamin B12": {},
+    "Meadowfoam Seed Oil": {}
+}
+}  
