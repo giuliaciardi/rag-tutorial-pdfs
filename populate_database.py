@@ -47,6 +47,7 @@ def main():
 
 def load_documents():
     document_loader = PyPDFDirectoryLoader(DATA_PATH)
+    # a PDF is an array of documents, where each document contains the page content and metadata with page number.
     return document_loader.load()
 
 
@@ -129,7 +130,7 @@ def metadata_population_csv(file_name, file_type, file_size):
     # Get the file information
     file_name = file_name
     file_type = file_type
-    file_size = os.path.getsize(f"{DATA_PATH}/{file_name}") / (1024 * 1024)  # Convert to MB
+    file_size = os.path.getsize(f"{DATA_PATH}/{file_name}")# / (1024 * 1024)  # Convert to MB
 
     # Define the CSV file path
     csv_file_path = os.path.join(os.path.dirname(__file__), "metadata.csv")
@@ -142,7 +143,7 @@ def metadata_population_csv(file_name, file_type, file_size):
         writer = csv.writer(file)
         
         # Get the last index in the CSV file
-        last_index = 0
+        # last_index = 0
         if csv_file_exists:
             with open(csv_file_path, "r") as file:
                 reader = csv.reader(file)

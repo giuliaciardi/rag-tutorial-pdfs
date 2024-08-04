@@ -9,7 +9,3 @@ def get_embedding_function():
     embeddings = OllamaEmbeddings(model="nomic-embed-text") # it permits to run open source LLMs locally
     return embeddings
 
-# to load model locally on cmd -> ollama pull llama2    (mistral)
-# to run model locally on cmd -> ollama run llama2
-# use ollama -> ollama serve
-

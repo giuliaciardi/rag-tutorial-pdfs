@@ -49,5 +49,6 @@ def query_rag(query_text: str):
     return response_text
 
 
+
 if __name__ == "__main__":
     main()
